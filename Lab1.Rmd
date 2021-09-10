@@ -58,5 +58,5 @@ sum_seq(10,100,10)
 ```{r}
 x <- c(1,2,3,4,5)
 
-sum(x)/lenght(x)
+sum(x)/length(x)
 ```
