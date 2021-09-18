@@ -1,0 +1,126 @@
+---
+title: "Lab2.Rmd"
+author: "Elisena"
+date: "9/15/2021"
+output: html_document
+---
+
+```{r}
+
+a <- c(1,3,2,4,5,6,2,3,7,8,1,8,9,5,2,5,2,7,8)
+
+
+numbers_to_test <- c(1,2,3,4,mean(a),5,6,7,8,9)
+
+sum_sq_deviations <-c() 
+for(i in 1: length(numbers_to_test)) {
+  sum_sq_deviations[i] <- sum((a-numbers_to_test[i])^2)
+}
+
+sum_sq_deviations
+plot(sum_sq_deviations)
+
+# confidence: 10
+```
+
+
+
+```{r}
+a <- c(1,3,2,4,5,6,2,3,7,8,1,8,9,5,2)
+
+sorted_a <- sort(a)
+
+length(a/2)
+m1 <-length(a)/2
+m2 <-(length(a)/2)+1
+
+sorted_a[m1]
+sorted_a[m2]
+  
+(sorted_a[m1]+sorted_a[m2])/2
+my_median <-function(){
+
+  
+}
+# confidence: 10
+```
+
+
+
+```{r}
+sections <- c("morning","afternoon","evening")
+grades <- c(85,90,93)
+
+my_data <- data.frame(sections,grades)
+
+library(ggplot2)
+
+ggplot(my_data, aes(x = sections, y = grades))+
+  geom_bar(stat="identity")
+
+# confidence: 0
+```
+
+
+```{r} 
+instructor <- c("one", "one", "one", "two", "two", "two")
+sections <- c("morning","afternoon","evening", "morning","afternoon","evening")
+grades <- c(75,78,90,88,76,63)
+
+my_data <- data.frame(instructor, sections,grades)
+
+library(ggplot2)
+
+ggplot(my_data, aes_(x=sections, y=grades, group=instructor, fill=instructor))+
+  geom_bar(stat="identity", position = "dodge")
+
+# confidence: 0
+```
+
+
+```{r}
+
+whr <- read.table("open_data/WHR2018.csv", 
+                             sep = ",",
+                             header = TRUE )
+
+library(dplyr)
+
+mean_hle <- whr %>%
+  filter(year >= 2010, 
+         year <= 2015)%>%
+  group_by(year)%>%
+  summarise(mean_healthy= mean(Healthy.life.expectancy.at.birth, na.rm = TRUE))
+
+knitr::kable(mean_hle)
+
+ggplot(mean_hle, aes(x = year, y = mean_healthy))+
+  geom_bar(stat="identity")
+# confidence: 0
+```
+
+
+```{r}
+
+whr <- read.table("open_data/WHR2018.csv", 
+                             sep = ",",
+                             header = TRUE )
+
+library(dplyr)
+
+mean_hle <- whr %>%
+  filter(year >= 2010, 
+         year <= 2015)%>%
+  group_by(year)%>%
+  summarise(mean_healthy= mean(Healthy.life.expectancy.at.birth, na.rm = TRUE),
+            sd_healthy = sd(Healthy.life.expectancy.at.birth, na.rm = TRUE))
+
+knitr::kable(mean_hle)
+
+ggplot(mean_hle, aes(x = year, y = mean_healthy))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin = mean_healthy - sd_healthy,
+                    ymax = mean_healthy + sd_healthy),
+                width = .25)
+# confidence: 0
+```
