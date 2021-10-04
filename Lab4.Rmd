@@ -1,0 +1,96 @@
+---
+title: "Lab4.Rmd"
+author: "Elisena"
+date: "10/04/2021"
+---
+
+```{r}
+
+my_paragraph <- "n law, an alien is any person (including an organization) who is not a citizen or a national of a specific country, although definitions and terminology differ to some degree depending upon the continent or region of Earth. More generally, however, the term 'alien' is perceived as synonymous with foreign national."
+
+the_letters <- unlist(strsplit(my_paragraph, split=""))
+lower_case <- tolower(the_letters)
+letter_counts <- table(lower_case)
+letter_counts <- data.frame(letter_counts)
+
+library(dplyr)
+
+final <- letter_counts %>%
+  filter(lower_case %in% the_letters == TRUE)
+
+total_letters <- sum(final$freq)
+
+final <- final %>%
+  mutate(probabilites = Freq/total_letters)
+
+knitr::kable(final)
+
+```
+
+
+
+```{r}
+my_letters <- sample(final$lower_case,50*5,replace=TRUE, prob = final$probabilities)
+# turn the vector into a matrix with 5 columns
+my_strings <- matrix(my_letters, ncol=5)
+
+# each row is a word, need to collapse the column to create a string
+paste(my_strings[1,], collapse="")
+#> [1] "ughpw"
+
+# loop to collapse all of the rows into words
+random_strings <-c()
+for(i in 1:dim(my_strings)[1]){
+  random_strings[i] <- paste(my_strings[i,], collapse="")
+}
+
+random_strings
+
+```
+
+
+
+```{r}
+
+
+step <- c(0)
+for (i in 1:10000){
+  coin_flip <- sample(c(1,-1),1)
+  step[i+1] <- step[i]+coin_flip
+}
+
+plot(step[1:10000])
+
+```
+
+
+```{r} 
+
+plot(step)
+max(step)
+min(step)
+```
+
+
+```{r}
+
+logical_step <- sign(step)
+
+sequence <- c()
+
+counter <- 0
+
+for(i in 1:length(logical_step)){
+  if(logical_step[i] == 0){
+    sequence <- c(sequence,counter)
+    counter <- 0
+    
+  }else{
+    counter <- counter+logical_step[i]
+  }
+}
+
+max(sequence)
+min(sequence)
+
+```
