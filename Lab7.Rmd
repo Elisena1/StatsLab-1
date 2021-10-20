@@ -1,0 +1,52 @@
+---
+title: "Lab5.Rmd"
+author: "Elisena"
+date: "10/19/2021"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+
+```
+
+
+
+```{r}
+?binom.test
+binom.test(x = 30,
+           n = 50,
+           alternative = "greater")
+
+```
+
+
+```{r}
+
+binom.test(x = 440,
+           n = 8000,
+           alternative = "greater")
+
+
+
+```
+
+
+```{r}
+
+
+rbinom(n= rep(1,10), size = 1, prob = c(.5,.5,.5,.5,.5,.25,.25,.25,.25,.25) )
+
+simulated_test <- replicate(10000, rbinom(n= rep(1,10), size = 1, prob = c(.5,.5,.5,.5,.5,.25,.25,.25,.25,.25) ))
+
+simulated_scores <- colSums(simulated_test)/10
+
+library(ggplot2)
+
+qplot(simulated_scores)+
+  geom_histogram()
+
+length(simulated_scores[simulated_scores > .75]) /10000
+
+
+```
