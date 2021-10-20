@@ -1,5 +1,5 @@
 ---
-title: "Lab5.Rmd"
+title: "Lab6.Rmd"
 author: "Elisena"
 date: "10/19/2021"
 ---
@@ -45,6 +45,8 @@ randomization_test <-function(A,B, resamples = 100){
 randomization_test(A=group_one,
                    B=group_two,
                    resamples=1000)
+
+# for group A, i would say that the order numbers are going up by one step while group B the numbers are not in order. when adding the numbers an dividing the by the amount that's in the set, their means are different. the mean of A is equal to 5 while B is equal to 4. 
 
 ```
 
