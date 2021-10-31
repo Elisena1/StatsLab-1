@@ -1,0 +1,64 @@
+---
+title: "Lab8.Rmd"
+author: "Elisena"
+date: "10/30/2021"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+
+
+
+```{r}
+
+to_zscores <- function(raw,mu,sd){
+  
+  zscores <- (raw-mu)/sd
+  
+  return(zscores)
+}
+some_numbers <- c(1,2,3,4,5)
+
+to_zscores(some_numbers,5,1)
+
+to_zscores_b <- function(raw,mu=NULL,sdev=NULL){
+  
+  if(is.null(mu) == TRUE) mu <- mean(raw)
+  
+  if(is.null(sdev) == TRUE) sdev <- sd(raw)
+  
+  zscores <- (raw-mu)/sdev
+  
+  return(zscores)
+}
+to_zscores_b(some_numbers, mu = 5, sdev=1)
+
+to_zscores_b(some_numbers)
+
+
+
+```
+
+
+```{r}
+
+z.test <- function(sample_mean,sample_size,mu,sigma){
+  smpl_dist_mean <-mu
+  smpl_dist_sd <- sigma/sqrt(sample_size)
+  
+  p_value <- pnorm(sample_mean,smpl_dist_mean,smpl_dist_sd, lower.tail = FALSE)
+  return(p_value)
+}
+
+z.test(sample_mean = 50,
+       sample_size = 25,
+       mu = 40,
+       sigma = 7)
+
+z.test(1,1,0,1)
+
+.5+.341
+
+```
+
