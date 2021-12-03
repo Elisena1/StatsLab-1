@@ -1,0 +1,42 @@
+---
+title: "Lab11.Rmd"
+author: "Elisena"
+date: "12/02/2021"
+---
+
+```{r}
+X <- c(1,4,3,2,5,4,3,6,7,8)
+Y <- c(1,3,6,7,8,2,8,7,6,9)
+```
+
+1A.
+
+```{r}
+
+(my_cor <- cor.test(X,Y))
+```
+   
+The correlation was $r$ = `r my_cor$estimate`, $p$ = `r my_cor$p.value`.
+
+The correlation was $r$ = `r round(my_cor$estimate,digits=2)`, $p$ = `r round(my_cor$p.value,digits=2)`.
+
+We found a positive correlation, `r papaja::apa_print(my_cor)$full_result`.
+
+   
+1B.
+```{r}
+sim_rs <- replicate(1000,cor(sample(X),sample(Y)))
+hist(sim_rs)
+length(sim_rs[sim_rs >= my_cor$estimate]) / 1000
+```
+   
+
+2A.
+```{r}
+sum(sort(X)*sort(Y, decreasing =TRUE))
+```
+
+
+2B.
+```{r}
+sum(sort(X)*sort(Y))
