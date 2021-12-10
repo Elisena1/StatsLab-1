@@ -1,0 +1,37 @@
+---
+title: "Lab12.Rmd"
+author: "Elisena"
+date: "12/11/2021"
+---
+
+```{r}
+
+
+
+some_data <- data.frame(Y= c(10,9,8,7,6,5,4,3,2,1,2,3,4,5,6,7,8,9,10),
+                        X= c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19))
+
+#lm(Y ~ X, data=some_data)
+
+
+
+#save_model <- lm(Y ~ X, data=some_data)
+#summary(save_model)
+
+#cor.test(some_data$Y,some_data$X)
+
+#summary(save_model)$r.squared
+
+#sqrt(summary(save_model)$r.squared)
+
+library(ggplot2)
+
+ggplot(some_data, aes(x=X, y=Y))+
+  geom_point()+
+  geom_smooth(method='lm', se=FALSE)
+
+#Yes, we should use the linear regression on this data because we are looking for the relationship between one or more explanatory variables.
+
+```
+
+
